@@ -85,7 +85,7 @@ class CardDia extends StatelessWidget {
                     ),
                   ),
                   Text(condicao.descricao, style: tema.textTheme.bodyMedium),
-                  if (dia.iuv != null)
+                  if (dia.iuv != null && dia.iuv! > 0)
                     Text(
                       'IUV ${dia.iuv!.toStringAsFixed(1)}',
                       style: tema.textTheme.bodySmall,
@@ -133,10 +133,14 @@ class GraficoTemperaturas extends StatelessWidget {
     ];
     if (validos.length < 2) return const SizedBox.shrink();
 
-    final menor =
+    final menorBruto =
         validos.map((dia) => dia.minima!).reduce((a, b) => a < b ? a : b) - 1;
-    final maior =
+    final maiorBruto =
         validos.map((dia) => dia.maxima!).reduce((a, b) => a > b ? a : b) + 1;
+    final minimo = (menorBruto / 5).floor() * 5;
+    final maximo = maiorBruto <= minimo
+        ? minimo + 5
+        : (maiorBruto / 5).ceil() * 5;
     final tema = Theme.of(context);
     final estiloEixo = tema.textTheme.labelSmall;
 
@@ -161,11 +165,12 @@ class GraficoTemperaturas extends StatelessWidget {
                 LineChartData(
                   minX: 0,
                   maxX: (validos.length - 1).toDouble(),
-                  minY: menor.toDouble(),
-                  maxY: maior.toDouble(),
+                  minY: minimo.toDouble(),
+                  maxY: maximo.toDouble(),
                   gridData: FlGridData(
                     show: true,
                     drawVerticalLine: false,
+                    horizontalInterval: 5,
                     getDrawingHorizontalLine: (_) =>
                         FlLine(color: tema.colorScheme.outlineVariant),
                   ),
@@ -195,6 +200,7 @@ class GraficoTemperaturas extends StatelessWidget {
                       sideTitles: SideTitles(
                         showTitles: true,
                         reservedSize: 36,
+                        interval: 5,
                         getTitlesWidget: (valor, _) =>
                             Text('${valor.round()}°', style: estiloEixo),
                       ),

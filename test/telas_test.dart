@@ -79,6 +79,7 @@ void main() {
     expect(find.text('Parcialmente Nublado'), findsOneWidget);
     expect(find.text('Tempestade'), findsOneWidget);
     expect(find.text('IUV 6.0'), findsOneWidget);
+    expect(find.text('IUV 0.0'), findsNothing);
 
     await tester.scrollUntilVisible(
       find.textContaining('Fonte: CPTEC/INPE'),
