@@ -1,0 +1,23 @@
+name: previsao
+description: "Consulta de previsão do tempo de cidades brasileiras no CPTEC/INPE."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  fl_chart: ^1.3.1
+  http: ^1.6.0
+  shared_preferences: ^2.5.6
+  xml: ^7.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
