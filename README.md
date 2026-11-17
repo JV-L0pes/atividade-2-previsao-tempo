@@ -14,8 +14,9 @@ ultravioleta, gráfico de temperaturas e cache local da última consulta.
 - **Pesquisa de cidades** pelo nome, sem acento, listando nome e UF. A previsão usa o
   `id` devolvido pelo próprio serviço.
 - **Previsão de 4 dias**, com todos os dias retornados pelo CPTEC/INPE: data,
-  mínima e máxima em °C, condição do tempo, ícone, IUV (quando disponível) e a data
-  de atualização informada pelo serviço.
+  mínima e máxima em °C, condição do tempo, ícone, IUV (quando o serviço informa
+  valor maior que zero — `0.0` é o que ele devolve quando não há estimativa) e a
+  data de atualização informada pelo serviço.
 - **Descrições legíveis** para as 40 siglas oficiais (`pn` → Parcialmente Nublado,
   `t` → Tempestade, `nv` → Nevoeiro, …), com fallback "Não definido".
 - **Gráfico** de linhas com mínima e máxima dos dias que têm os dois valores.
@@ -100,4 +101,12 @@ flutter test
 
 ## Capturas de tela
 
-As capturas estão em `docs/capturas/`.
+Capturadas no motorola moto g86 5G (Android 16):
+
+| Busca | Resultados |
+| --- | --- |
+| ![Tela de busca com a última consulta](docs/capturas/01-busca.png) | ![Resultados para campinas com nome e UF](docs/capturas/02-resultados.png) |
+
+| Previsão de 4 dias | Sem conexão (cache) | Nenhuma cidade encontrada |
+| --- | --- | --- |
+| ![Gráfico e cards dos 4 dias](docs/capturas/03-previsao.png) | ![Aviso de cache com data de atualização](docs/capturas/04-sem-conexao.png) | ![Mensagem de cidade não encontrada](docs/capturas/05-nenhuma-cidade.png) |
